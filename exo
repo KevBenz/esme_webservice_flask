@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+# Données des réponses des consommateurs
+prix_acceptable = [50, 55, 45, 60, 52, 48, 53, 51, 49, 54, 50, 47, 46, 58, 44, 42, 57, 43, 56, 59]
+prix_trop_cher = [65, 70, 60, 75, 68, 64, 66, 67, 63, 69, 65, 62, 61, 73, 59, 58, 72, 57, 71, 74]
+# Trier les prix pour chaque groupe
+prix_acceptable_sorted = np.sort(prix_acceptable)
+prix_trop_cher_sorted = np.sort(prix_trop_cher)
+# Calculer les distributions cumulées en pourcentage (0 à 1)
+cumul_acceptable = 1 - (np.arange(1, len(prix_acceptable_sorted) + 1) / len(prix_acceptable_sorted))
+cumul_trop_cher = np.arange(1, len(prix_trop_cher_sorted) + 1) / len(prix_trop_cher_sorted)
+# Vérification des prix triés et des distributions cumulées
+print("Prix Acceptable Triés:", prix_acceptable_sorted)
+print("Prix Trop Cher Triés:", prix_trop_cher_sorted)
+print("\nDistribution Cumulée Acceptable:", cumul_acceptable)
+print("Distribution Cumulée Trop Cher:", cumul_trop_cher)
+# Tracer les courbes
+plt.figure(figsize=(8,5))
+plt.plot(prix_acceptable_sorted, cumul_acceptable, label="Prix Acceptable", color='blue')
+plt.plot(prix_trop_cher_sorted, cumul_trop_cher, label="Prix Trop Cher", color='orange')
+# Légendes et affichage
+plt.xlabel("Prix (€)")
+plt.ylabel("Proportion des répondants")
+plt.title("Méthode des 2 Courbes : Prix Acceptable vs. Prix Trop Cher")
+plt.legend()
+plt.grid()
+plt.show()
